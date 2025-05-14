@@ -1,0 +1,46 @@
+{
+    "name": ":vendor_slug/:package_slug",
+    "description": ":package_description",
+    "keywords": [
+        ":vendor_stud",
+        ":vendor_slug",
+        ":package_stud",
+        ":package_slug"
+    ],
+    "type": "library",
+    "license": "MIT",
+    "homepage": "https://github.com/:organization_slug/:repository_slug",
+    "authors": [
+        {
+            "name": ":author_name",
+            "email": "author@domain.com"
+        }
+    ],
+    "require": {
+        "php": "^8.0"
+    },
+    "require-dev": {},
+    "autoload": {
+        "psr-4": {
+            ":vendor_stud\\:package_stud\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "@php -r \"echo 'Tests: 0 passed (0 assertions)';\""
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-main": "1.x-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
