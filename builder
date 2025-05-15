@@ -193,7 +193,7 @@ class Builder
 
         file_put_contents(
             $file,
-            preg_replace('/<!--delete-->.*<!--\/delete-->/s', '', $contents) ?: $contents
+            preg_replace('/<!--delete-->.*?<!--\/delete-->/s', '', $contents) ?: $contents
         );
     }
 
