@@ -1,7 +1,10 @@
 #!/usr/bin/env php
 <?php
 
-(new class {
+$options = getopt('p::', ['rootPath::']);
+
+(new class ($options) {
+    protected string $rootPath;
     protected array $placeholders = [
         ':author_name',
         ':author',
@@ -19,10 +22,15 @@
     ];
 
     public function __construct(
-        protected ?string $rootPath = null,
+        protected array $options = [],
     )
     {
-        $this->rootPath ??= __DIR__;
+        $this->rootPath = $this->getOption('p', 'rootPath', __DIR__);
+    }
+
+    protected function getOption(string $short_option = '', string $long_option = '', mixed $default = null): mixed
+    {
+        return $this->options[$short_option] ?? $this->options[$long_option] ?? $default;
     }
 
     public function ask(string $question, string $default = ''): string
@@ -63,10 +71,10 @@
      *
      * @return string
      * @example
-     *         str_last('app/Controllers/HomeController.php', '/')
+     *         strLast('app/Controllers/HomeController.php', '/')
      *         => HomeController.php
      */
-    public function str_last(string $subject, string $search): string
+    public function strLast(string $subject, string $search): string
     {
         $pos = strrpos($subject, $search);
 
