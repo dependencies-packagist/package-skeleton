@@ -1,8 +1,7 @@
 #!/usr/bin/env php
 <?php
 
-class Builder
-{
+(new class {
     protected array $placeholders = [
         ':author_name',
         ':author',
@@ -351,7 +350,7 @@ class Builder
         return [$response->name ?? $authorName, $response->login ?? $username];
     }
 
-    public function run(): void
+    public function __invoke(): void
     {
         $gitName = $this->shellExec('git config user.name');
         $authorName = $this->ask('Author name', $gitName);//
@@ -451,7 +450,4 @@ class Builder
 
         $this->writeln('successfully.');
     }
-}
-
-$builder = new Builder();
-$builder->run();
+})();
