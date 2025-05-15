@@ -390,6 +390,7 @@ $options = getopt('p::', ['rootPath::']);
         $useBugReport = $this->confirm('Enable Bug Report?', false);
         $useDependabot = $this->confirm('Enable Dependabot?', false);
         $useUpdateChangelogWorkflow = $this->confirm('Use automatic changelog updater workflow?', false);
+        $useGitHubSponsor = $this->confirm('Enable GitHub Sponsors?', false);
 
         $this->writeln('------');
         $this->writeln("Author                  : {$authorName} ({$authorUsername}, {$authorEmail})");
@@ -404,6 +405,7 @@ $options = getopt('p::', ['rootPath::']);
         $this->writeln('Use Bug Report          : ' . ($useBugReport ? 'yes' : 'no'));
         $this->writeln('Use Dependabot          : ' . ($useDependabot ? 'yes' : 'no'));
         $this->writeln('Use Auto-Changelog      : ' . ($useUpdateChangelogWorkflow ? 'yes' : 'no'));
+        $this->writeln('Use GitHub Sponsors     : ' . ($useGitHubSponsor ? 'yes' : 'no'));
         $this->writeln('------');
         $this->writeln('This script will replace the above values in all relevant files in the project directory.');
 
@@ -448,7 +450,11 @@ $options = getopt('p::', ['rootPath::']);
             $this->deleteFileIfExists(__DIR__ . '/.github/workflows/update-changelog.yml');
         }
 
-        if (!$useBugReport && !$useDependabot && !$useUpdateChangelogWorkflow) {
+        if (!$useGitHubSponsor) {
+            $this->deleteFileIfExists(__DIR__ . '/.github/FUNDING.yml');
+        }
+
+        if (!$useBugReport && !$useDependabot && !$useUpdateChangelogWorkflow && !$useGitHubSponsor) {
             $this->deleteDirectoryIfExists(__DIR__ . '/.github');
         }
 
