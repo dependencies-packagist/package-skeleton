@@ -13,16 +13,27 @@
 <!-- TABLE OF CONTENTS -->
 <details>
     <summary>Table of Contents</summary>
-    <ol>
+    <ol><!--delete-->
+        <li><a href="#features">Features</a></li><!--/delete-->
         <li><a href="#roadmap">Roadmap</a></li>
         <li><a href="#installation">Installation</a></li>
         <li><a href="#usage">Usage</a></li>
         <li><a href="#contributing">Contributing</a></li>
         <li><a href="#contributors">Contributors</a></li>
-        <li><a href="#license">License</a></li>
-        <li><a href="#acknowledgments">Acknowledgments</a></li>
+        <li><a href="#license">License</a></li><!--delete-->
+        <li><a href="#acknowledgments">Acknowledgments</a></li><!--/delete-->
     </ol>
-</details>
+</details><!--delete-->
+
+<!-- FEATURES -->
+
+## Features
+
+- Interactive CLI to guide you through initialization
+- Automatically generates configuration files and directory structure
+- Customizes templates and components based on your input
+
+<!--/delete-->
 
 <!-- ROADMAP -->
 
@@ -51,14 +62,25 @@ composer require :vendor_slug/:package_slug
 
 <p align="right">[<a href="#readme-top">back to top</a>]</p>
 
-
 <!-- USAGE EXAMPLES -->
 
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+<!--delete-->
+This project provides a build script to help you generate the required project structure and files interactively.
+
+### Getting Started
+
+Run the following command in your terminal:
+
+```shell
+./builder
+```
+
+Follow the step-by-step prompts to complete the setup process.
 
 <p align="right">[<a href="#readme-top">back to top</a>]</p>
+<!--/delete-->
 
 <!-- CONTRIBUTING -->
 
@@ -95,9 +117,9 @@ Contributions of any kind are welcome!
 
 ## License
 
-Distributed under the project_license. Please see [License File] for more information.
+Distributed under the MIT License (MIT). Please see [License File] for more information.
 
-<p align="right">[<a href="#readme-top">back to top</a>]</p>
+<p align="right">[<a href="#readme-top">back to top</a>]</p><!--delete-->
 
 <!-- ACKNOWLEDGMENTS -->
 
@@ -109,7 +131,7 @@ We would like to express our sincere thanks to the following:
 * [Img Shields](https://shields.io)
 * [GitHub Pages](https://pages.github.com)
 
-<p align="right">[<a href="#readme-top">back to top</a>]</p>
+<p align="right">[<a href="#readme-top">back to top</a>]</p><!--/delete-->
 
 [GitHub Tag]: https://img.shields.io/github/v/tag/:organization_slug/:repository_slug
 
@@ -121,14 +143,14 @@ We would like to express our sincere thanks to the following:
 
 [Packagist License]: https://img.shields.io/github/license/:organization_slug/:repository_slug
 
+[GitHub Tag URL]: https://github.com/:organization_slug/:repository_slug/tagsv
+
 [Packagist URL]: https://packagist.org/packages/:vendor_slug/:package_slug
 
 [Repository URL]: https://github.com/:organization_slug/:repository_slug
 
 [GitHub Open Issues]: https://github.com/:organization_slug/:repository_slug/issues
 
-[GitHub Tag URL]: https://github.com/:organization_slug/:repository_slug/tagsv
+[Composer]: https://getcomposer.org
 
 [License File]: https://github.com/:organization_slug/:repository_slug/blob/main/LICENSE
-
-[Composer]: https://getcomposer.org
