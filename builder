@@ -1,8 +1,10 @@
 #!/usr/bin/env php
 <?php
 
-class Builder
-{
+$options = getopt('p::', ['rootPath::']);
+
+(new class ($options) {
+    protected string $rootPath;
     protected array $placeholders = [
         ':author_name',
         ':author',
@@ -20,10 +22,15 @@ class Builder
     ];
 
     public function __construct(
-        protected ?string $rootPath = null,
+        protected array $options = [],
     )
     {
-        $this->rootPath ??= __DIR__;
+        $this->rootPath = $this->getOption('p', 'rootPath', __DIR__);
+    }
+
+    protected function getOption(string $short_option = '', string $long_option = '', mixed $default = null): mixed
+    {
+        return $this->options[$short_option] ?? $this->options[$long_option] ?? $default;
     }
 
     public function ask(string $question, string $default = ''): string
@@ -64,10 +71,10 @@ class Builder
      *
      * @return string
      * @example
-     *         str_last('app/Controllers/HomeController.php', '/')
+     *         strLast('app/Controllers/HomeController.php', '/')
      *         => HomeController.php
      */
-    public function str_last(string $subject, string $search): string
+    public function strLast(string $subject, string $search): string
     {
         $pos = strrpos($subject, $search);
 
@@ -193,7 +200,7 @@ class Builder
 
         file_put_contents(
             $file,
-            preg_replace('/<!--delete-->.*<!--\/delete-->/s', '', $contents) ?: $contents
+            preg_replace('/<!--delete-->.*?<!--\/delete-->/s', '', $contents) ?: $contents
         );
     }
 
@@ -351,7 +358,7 @@ class Builder
         return [$response->name ?? $authorName, $response->login ?? $username];
     }
 
-    public function run(): void
+    public function __invoke(): void
     {
         $gitName = $this->shellExec('git config user.name');
         $authorName = $this->ask('Author name', $gitName);//
@@ -383,6 +390,7 @@ class Builder
         $useBugReport = $this->confirm('Enable Bug Report?', false);
         $useDependabot = $this->confirm('Enable Dependabot?', false);
         $useUpdateChangelogWorkflow = $this->confirm('Use automatic changelog updater workflow?', false);
+        $useGitHubSponsor = $this->confirm('Enable GitHub Sponsors?', false);
 
         $this->writeln('------');
         $this->writeln("Author                  : {$authorName} ({$authorUsername}, {$authorEmail})");
@@ -397,6 +405,7 @@ class Builder
         $this->writeln('Use Bug Report          : ' . ($useBugReport ? 'yes' : 'no'));
         $this->writeln('Use Dependabot          : ' . ($useDependabot ? 'yes' : 'no'));
         $this->writeln('Use Auto-Changelog      : ' . ($useUpdateChangelogWorkflow ? 'yes' : 'no'));
+        $this->writeln('Use GitHub Sponsors     : ' . ($useGitHubSponsor ? 'yes' : 'no'));
         $this->writeln('------');
         $this->writeln('This script will replace the above values in all relevant files in the project directory.');
 
@@ -441,7 +450,11 @@ class Builder
             $this->deleteFileIfExists(__DIR__ . '/.github/workflows/update-changelog.yml');
         }
 
-        if (!$useBugReport && !$useDependabot && !$useUpdateChangelogWorkflow) {
+        if (!$useGitHubSponsor) {
+            $this->deleteFileIfExists(__DIR__ . '/.github/FUNDING.yml');
+        }
+
+        if (!$useBugReport && !$useDependabot && !$useUpdateChangelogWorkflow && !$useGitHubSponsor) {
             $this->deleteDirectoryIfExists(__DIR__ . '/.github');
         }
 
@@ -451,7 +464,4 @@ class Builder
 
         $this->writeln('successfully.');
     }
-}
-
-$builder = new Builder();
-$builder->run();
+})();
