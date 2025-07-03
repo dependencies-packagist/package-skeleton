@@ -143,7 +143,7 @@ We would like to express our sincere thanks to the following:
 
 [Packagist License]: https://img.shields.io/github/license/:organization_slug/:repository_slug
 
-[GitHub Tag URL]: https://github.com/:organization_slug/:repository_slug/tagsv
+[GitHub Tag URL]: https://github.com/:organization_slug/:repository_slug/tags
 
 [Packagist URL]: https://packagist.org/packages/:vendor_slug/:package_slug
 
