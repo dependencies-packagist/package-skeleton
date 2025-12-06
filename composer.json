@@ -33,7 +33,7 @@
         }
     },
     "scripts": {
-        "docs": "vendor/bin/doctum.php update doctum.php"
+        "docs": "@php vendor/bin/doctum.php update doctum.php"
     },
     "extra": {
         "branch-alias": {
